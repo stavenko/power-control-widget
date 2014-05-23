@@ -237,8 +237,8 @@ var PowerControlWidget = function(settings){
 		this.ctx.bezierCurveTo(a+w+a, b, a+a+w, b+h, a+w, b+h );
 		this.ctx.bezierCurveTo( w/2+a, b+h, w/2+a,b+h, a, b+h);
 		this.ctx.bezierCurveTo( 0, b+h, 0,b, a,b);
-		
-		this.ctx.fillStyle = fs.hexString();
+		fs.alpha(0.9);
+		this.ctx.fillStyle = fs.hslString();
 		this.ctx.fill();
 		this.ctx.closePath();
 		this.ctx.restore();
