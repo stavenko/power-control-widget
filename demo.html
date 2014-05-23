@@ -1,11 +1,13 @@
 <html>
 <head>
-	<script src="https://raw.githubusercontent.com/stavenko/power-control-widget/master/power-control.js"> </script>
+	<script src="./power-control.js"> </script>
+	<script src="./color-0.5.0.min.js"> </script>
+	
 	<script>
 	function init(){
 		
 		var cont = document.getElementById("wcont");
-		var pc = new PowerControlWidget({container:PCC[0], starting_percent:-0.5, end_percent:1.5,progress_value:1.2345,
+		var pc = new PowerControlWidget({container:cont, starting_percent:-0.5, end_percent:1.5,progress_value:1.2345,
 					slide:function(val){
 						console.log("V", val);
 					},
@@ -14,11 +16,11 @@
 	}
 	</script>
 </head>
-<body>
+<body onload ="init()";>
 	<h1>
 		Example of basic usage of canvas Power-Control widget
 	</h1>
-	
+	<b>Important!:</b> This library depends on color.js (<a href="https://github.com/harthur/color">https://github.com/harthur/color</a>)
 	<div id="wcont">
 		
 	</div>

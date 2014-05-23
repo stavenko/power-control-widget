@@ -38,3 +38,12 @@ There are also a bunch of color settings:
 	this.cursor_color = settings.cursor_color || "#115";
 	
 
+## Functions
+* PowerControlWidget.get_value() - Returns current slider value;
+
+* PowerControlWidget.set_value(float_val) - setup slider value - set it to certain percentage float value should be in [starting_percent, end_percent] range
+* PowerControlWidget.set_progress_value(float_val) - same, but for setting up progressbar
+
+## Dependencies
+
+PowerControlWidget uses https://github.com/harthur/color for color manipulations. 
