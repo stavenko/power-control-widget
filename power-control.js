@@ -57,6 +57,14 @@ var PowerControlWidget = function(settings){
 		
 	};
 	
+	this.set_value = function(value){
+		this.value = this._get_x(value);
+		this.redraw();
+	}
+	this.set_progress_value = function(value){
+		this.progress_value = value;
+		this.redraw();
+	}
 	this.canvas.addEventListener("mousedown", function(event){
 		self.mouse_down = true;
 		
@@ -83,14 +91,7 @@ var PowerControlWidget = function(settings){
 		
 		
 	})
-	this.set_value = function(value){
-		this.value = this._get_x(value);
-		this.redraw();
-	}
-	this.set_progress_value = function(value){
-		this.progress_value = value;
-		this.redraw();
-	}
+
 	
 	this.canvas.addEventListener("mousemove", function(event){
 		if (self.mouse_down){
@@ -179,14 +180,6 @@ var PowerControlWidget = function(settings){
 		this.ctx.bezierCurveTo(a+w+a, b, a+a+w, b+h, a+w, b+h );
 		this.ctx.bezierCurveTo( w/2+a, b+h, w/2+a,b+h, a, b+h);
 		this.ctx.bezierCurveTo( 0, b+h, 0,b, a,b);
-		
-		
-		//this.ctx.bezierCurveTo(a+a+w,b, a+a+w, b+h, x,y );
-		
-		//x -=a;
-		//y += h/2
-		
-		// this.ctx.bezierCurveTo(x+a, y, x, y, x,y );
 		
 		this.ctx.closePath();
 		this.ctx.strokeStyle = this.border_color;

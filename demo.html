@@ -7,7 +7,7 @@
 	function init(){
 		
 		var cont = document.getElementById("wcont");
-		var pc = new PowerControlWidget({container:cont, starting_percent:-0.5, end_percent:1.5,progress_value:1.2345,
+		var pc = new PowerControlWidget({container:cont, starting_percent:-0.5, end_percent:1.5,progress_value:0,
 					slide:function(val){
 						console.log("V", val);
 					},
@@ -15,6 +15,11 @@
 				});
 	}
 	</script>
+	<style>
+	#wcont{
+		margin: 20px;
+	}
+	</style>
 </head>
 <body onload ="init()";>
 	<h1>
