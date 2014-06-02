@@ -2,10 +2,10 @@
 var PowerControlWidget = function(settings){
 	
 	this.container = settings.container || undefined ;
-	this.width = settings.width || 300;
-	this._info_width = settings.info_width || 130;
+	this.width = settings.width || 350;
+	this._info_width = settings.info_width || 100;
 	this._line_width = this.width - this._info_width;
-	this.height = settings.height || 24;
+	this.height = settings.height || 17;
 	
 	this.starting_percent = settings.starting_percent|| 0;
 	this.end_percent = settings.end_percent || 1; 
@@ -17,11 +17,13 @@ var PowerControlWidget = function(settings){
 	this.onslide = settings.slide  || function(value, pval){};
 	this.onchange = settings.change  || function(value, pval){};
 
-	this.border_color = settings.border_color || "#115";
+	this.border_color = settings.border_color || "#ddd";
 	this.below_z_color = settings.below_z_color || "#00F";
 	this.upper_1_color    = settings.upper_1_color || "#F00";
 	this.background_color = settings.background_color || "#FFF";
 	this.cursor_color = settings.cursor_color || "#115";
+	this.text_color = settings.text_color || "#fff";
+	
 	
 	// this.upper_zero_color    = settings.lower_color || "#0F0";
 	// this.p_lower_zero_color    = settings.lower_color || "#0F0";
@@ -59,6 +61,7 @@ var PowerControlWidget = function(settings){
 	
 	this.set_value = function(value){
 		this.value = this._get_x(value);
+		this._percent_value = value;
 		this.redraw();
 	}
 	this.set_progress_value = function(value){
@@ -80,6 +83,12 @@ var PowerControlWidget = function(settings){
 		self._percent_value = self._get_percent(self.value);
 		self.redraw();
 		self.onchange(self._percent_value, self.progress_value);
+		event.stopPropagation();
+		event.preventDefault();
+	    event.cancelBubble=true;
+	    event.returnValue=false;
+		return false;
+		
 	})
 	this.canvas.addEventListener("mouseup", function(event){
 		self.mouse_down = false;
@@ -109,7 +118,15 @@ var PowerControlWidget = function(settings){
 			self.redraw();
 			self.onslide(self._percent_value, self.progress_value);
 			
+			
 		}
+		event.stopPropagation();
+		event.preventDefault();
+	    event.cancelBubble=true;
+	    event.returnValue=false;
+		return false;
+
+		
 	})
 	this._draw_inner_bg = function(){
 		var b = this.padding_top_bottom;
@@ -209,15 +226,10 @@ var PowerControlWidget = function(settings){
 		var h =  this.height - (2*b);
 		var fs = Color(this.background_color).darken(0.4);
 		if(val < 0){
-			//console.log(">>", fs);
-			
 			fs = Color(this.below_z_color).darken(0.4);
-			// console.log(">>", fs);
-		
 		}
 		if(val >1){
 			fs = Color(this.upper_1_color).darken(0.4);
-			
 		}
 		
 		this.ctx.save();
@@ -246,7 +258,7 @@ var PowerControlWidget = function(settings){
 		// Нарисовали процент
 		this.ctx.save()
 		this.ctx.translate(this._line_width+ this.padding_top_bottom,  this.height-this.padding_top_bottom);
-		this.ctx.fillStyle = "#000";
+		this.ctx.fillStyle = this.text_color;
 		this.ctx.font = base_font_size + "pt Arial";
 		//this.ctx.font = "italic 8pt Arial";
 		
@@ -272,7 +284,7 @@ var PowerControlWidget = function(settings){
 		
 		this.ctx.save()
 		this.ctx.translate(this._line_width+ this.padding_top_bottom + (base_marg*1.1) + base_font_size, this.height-this.padding_top_bottom );
-		this.ctx.fillStyle = "#000";
+		this.ctx.fillStyle = this.text_color;
 		this.ctx.font = base_font_size + "pt Arial";
 		//this.ctx.font = "italic 8pt Arial";
 		
